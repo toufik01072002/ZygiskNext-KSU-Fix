@@ -24,7 +24,10 @@ pub fn check_permission() -> Result<()> {
     let context = fs::read_to_string("/proc/self/attr/current")?;
     let context = context.trim_end_matches('\0');
     //TODO: remove magisk context after debug finished
-    if context != "u:r:su:s0" && context != "u:r:magisk:s0" {
+    if context != "u:r:su:s0"
+        && context != "u:r:magisk:s0"
+        && context != "u:r:ksu:s0"
+    {
         bail!("SELinux context incorrect: {context}");
     }
 
